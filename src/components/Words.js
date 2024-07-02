@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Grid from './Grid';
 
 const API_URL = '/api/api/fe/wordle-words';
 
@@ -13,16 +14,10 @@ export default function Words() {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        
-        console.log({response})
-
         const words = await response.json();
-
-        console.log({words})
-        // const index = Math.floor(Math.random() * words.length);
-        // setWord(words[index]);
+        const index = Math.floor(Math.random() * words.length);
+        setWord(words[index]);
       } catch(error) {
-        console.log(error.message)
         throw new Error('Error fetching api', error)
       }
     }
@@ -32,7 +27,8 @@ export default function Words() {
     
   return (
     <div>
-      {/* {word} */}
+      <Grid word={word} />
+      {word}
     </div>
   )
 }
